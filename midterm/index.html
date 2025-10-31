@@ -160,7 +160,85 @@
             </div>
         </section>
         
-        
+        <section id="testimonials-section" class="testimonials-section">
+            <div class="contaner-wraper" style="margin-top: -10%;">
+                <h2 style="color: #8cb348;">Customer Testimonials</h2>
+                
+                <div class="testimonials-container">
+                    
+                    <div class="testimonial-card visible">
+                        <div class="testimonial-header">
+                            <img src="../assets/testimonial-1.jpg" alt="Profile of Sarah Johnson" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Sarah Johnson</h4>
+                                <div class="star-rating">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Amazing experience! The bikes are well-maintained and the rental process was incredibly smooth. I'll definitely be renting again on my next visit!</p>
+                    </div>
+
+                    <div class="testimonial-card visible">
+                        <div class="testimonial-header">
+                            <img src="../assets/testimonial-2.jpg" alt="Profile of Michael Chen" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Michael Chen</h4>
+                                <div class="star-rating">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Excellent service and friendly staff. The bikes are perfect for exploring the city. Highly recommended for tourists and locals alike!</p>
+                    </div>
+
+                    <!-- Additional testimonials (hidden by default) -->
+                    <div class="testimonial-card hidden">
+                        <div class="testimonial-header">
+                            <img src="../assets/testimonial-3.jpg" alt="Profile of Emma Rodriguez" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Emma Rodriguez</h4>
+                                <div class="star-rating">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Great selection of bikes and competitive pricing. The rental process was quick and hassle-free. Will definitely use again!</p>
+                    </div>
+
+                    <div class="testimonial-card hidden">
+                        <div class="testimonial-header">
+                            <img src="../assets/testimonial-4.jpg" alt="Profile of James Williams" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>James Williams</h4>
+                                <div class="star-rating">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Outstanding experience from start to finish. The staff went above and beyond to ensure I had the perfect bike for my adventure!</p>
+                    </div>
+                </div>
+
+                <button class="view-more-btn" id="viewMoreBtn">View More Testimonials</button>
+            </div>
+        </section>
+
         <section id="cta-section" class="green-banner-box">
             <div class="green-overlay"></div>
             <div class="banner-content-inner">
@@ -225,7 +303,32 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            let showAll = false;
 
+            viewMoreBtn.addEventListener('click', function() {
+                showAll = !showAll;
+                
+                testimonialCards.forEach((card, index) => {
+                    if (index >= 2) { 
+                        if (showAll) {
+                            card.classList.remove('hidden');
+                            card.classList.add('visible');
+                        } else {
+                            card.classList.add('hidden');
+                            card.classList.remove('visible');
+                        }
+                    }
+                });
+
+                
+                viewMoreBtn.textContent = showAll ? 'View Less Testimonials' : 'View More Testimonials';
+            });
+        });
+    </script>
 </body>
 </html> 
 
