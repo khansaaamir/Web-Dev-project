@@ -150,7 +150,7 @@ header {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    background-image: url('./assets/home_bikerental_bike1.jpg');
+    background-image: url('../assets/home_bikerental_bike1.jpg');
     background-size: cover;
     background-position: center center;
 }
@@ -352,7 +352,7 @@ header {
     padding: 80px 0;
     background-color: #f0f0f0;
     text-align: center;
-    background-image: url("./assets/home_bikerental_pattern.png");
+    background-image: url("../assets/home_bikerental_pattern.png");
     background-position:  center;
     display: flex;
     height: 700px;
@@ -451,7 +451,7 @@ header {
 .green-banner-box {
     position: relative;
     height: 400px;
-    background-image: url('./assets/home_bikerental_bg_calltoaction.jpg');
+    background-image: url('../assets/home_bikerental_bg_calltoaction.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -562,3 +562,5 @@ header {
   padding: 0;
   margin: 0;
 }
+
+
