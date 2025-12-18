@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Create New Product</h2>
+
+  <form action="/admin/products/add" method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+      <label class="form-label text-start d-block">Product Name</label>
+      <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label text-start d-block">Price</label>
+      <input type="text" name="price" class="form-control">
+    </div>
+
+    <div class="mb-3">
+    <label class="form-label text-start d-block">Category</label>
+    <select name="category" class="form-control">
+        <option value="">Select Category</option>
+        <option value="Mountain">Mountain</option>
+        <option value="Road">Road</option>
+        <option value="City">City</option>
+    </select>
+    </div>
+
+
+    <div class="mb-3">
+      <label class="form-label text-start d-block">Description</label>
+      <textarea name="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label text-start d-block">Product Image</label>
+      <input type="file" name="image" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Product</button>
+  </form>
+</div>

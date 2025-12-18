@@ -1,0 +1,162 @@
+<main>
+        <div id="hero-section" class="big-picture-area">
+            
+            <div class="hero-text-contaner">
+                
+                <h1>Rent a bike anywhere you want</h1>
+                <a href="#map-section" class="main-btn-cities">See all available cities</a>
+            </div>
+        </div>
+        
+        <div id="features-section" class="bike-cards-thing">
+            
+                <h2>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</h2>
+                <div class="arrow-down">
+                  <img src="/assets/home_bikerental_arrow_bottom.png" alt="arrow image">
+                </div>
+
+                <div class="bike-list-flex">
+                    <div class="contaner-wraper">
+                        <h2 id="bikess">Our Bikes</h2>
+
+                        <form method="get" action="#bikess">
+                            Category:
+                            <select name="category">
+                                <option value="">All</option>
+                                <option value="Mountain" <% if(category=='Mountain'){ %>selected<% } %>>Mountain</option>
+                                <option value="Road" <% if(category=='Road'){ %>selected<% } %>>Road</option>
+                                <option value="City" <% if(category=='City'){ %>selected<% } %>>City</option>
+                            </select>
+                            Price Min: <input type="number" name="minPrice" value="<%= minPrice %>">
+                            Max: <input type="number" name="maxPrice" value="<%= maxPrice %>">
+                            <button type="submit">Filter</button>
+                        </form>
+                        <div class="bike-list-flex" id="bike-list-flex">
+                            <% products.forEach(function(product){ %>
+                                <div class="bike-card-item">
+                                    <a href="#">
+                                        <img src="<%= product.image %>">
+                                        <p><%= product.name %> - $<%= product.price %></p>
+                                        <p><%= product.description %></p>
+                                    </a>
+                                </div>
+                            <% }) %>
+                        </div>
+
+                        <div>
+                            <% if(currentPage > 1){ %>
+                                <div class="prev-button">
+                                <a href="/?page=<%= currentPage-1 %>&category=<%= category %>&minPrice=<%= minPrice %>&maxPrice=<%= maxPrice %>#bikess" >Prev</a>
+                                </div>
+                                <% } %>
+                            Page <%= currentPage %> of <%= totalPages %>
+                            <% if(currentPage < totalPages){ %>
+                                <div class="next-button">
+                                <a href="/?page=<%= currentPage+1 %>&category=<%= category %>&minPrice=<%= minPrice %>&maxPrice=<%= maxPrice %>#bikess" >Next</a>
+                                </div>
+                            <% } %>
+                        </div>
+        
+                </div>
+
+               
+            </div>
+          </div>
+
+
+        <section id="map-section" class="map-list-part">
+            <div class="diamond-divider">
+              <img src="/assets/home_bikerental_hr.png" alt="be in diamond-divider image">
+            </div>
+            <div class="contaner-wraper">
+                <div class="loc-grid-imature">
+                    <div class="loc-text-col">
+                        <h2>Choose where you want to rent a bike</h2>
+                        <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum.</p>
+                        <a href="#" class="link-text">See whole list of cities</a>
+                    </div>
+                    
+                    <div class="loc-list-col">
+                        <div class="loc-list-items">
+                            <ul>
+                                <li><a href="#">Quent per conubia nostra</a></li>
+                                <li><a href="#">Nceptos himenaeos</a></li>
+                                <li><a href="#">Mauris in erat</a></li>
+                                <li><a href="#">Mauris in erat justo</a></li>
+                                <li><a href="#">Aenean sollicitudin orem qui</a></li>
+                                <li><a href="#">Duis sed odio sit amet nibh</a></li>
+                                <li><a href="#">Morbi accumsan ipsum velit</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="#">Duis sed odio sit amet nibh</a></li>
+                                <li><a href="#">Morbi accumsan ipsum velit</a></li>
+                                <li><a href="#">Nam nec tellus</a></li>
+                                <li><a href="#">Class aptent taciti sociosqu</a></li>
+                                <li><a href="#">Mauris in erat justo</a></li>
+                                <li><a href="#">Sed non neque</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="loc-map-col">
+                         <div class="map-placeholder" >
+                          <img src="/assets/home_bikerental_map.png" alt="map-section image">
+                         </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="pricing-section" class="price-table-part">
+            <div class="contaner-wraper">
+                <div class="price-cards-row">
+                    <div class="price-card-box">
+                        <h3>1 day</h3>
+                        <span class="price-tag"><span>$</span>39</span>
+                        <hr>
+                        <p>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit</p>
+                        <a href="#" class="main-btn">Book now</a>
+                    </div>
+                    
+                    <div class="price-card-box highlight">
+                        <h3>Weekend</h3>
+                        <span class="price-tag"><span>$</span>54</span>
+                        <hr>
+                        <p>Ut maximus odio et vestibulum gravida. Ut nec urna vel enim scelerisque mollis! Vivamus eget pulvinar justo.</p>
+                        <a href="#" class="main-btn">Book now</a>
+                    </div>
+                    
+                    <div class="price-card-box">
+                        <h3>1 week</h3>
+                        <span class="price-tag"><span>$</span>57</span>
+                        <hr>
+                        <p>In hac habitasse platea dictumst. Vivamus molestie porttitor fringilla. In id mattis lectus, vel per inceptos.</p>
+                        <a href="#" class="main-btn">Book now</a>
+                    </div>
+                    
+                    <div class="price-card-box">
+                        <h3>1 month</h3>
+                        <span class="price-tag"><span>$</span>67</span>
+                        <hr>
+                        <p>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit</p>
+                        <a href="#" class="main-btn">Book now</a>
+                    </div>
+                </div>
+
+                <p style="font-size: 15px; color: #aaa; margin-top: 50px; padding-left: 150px; padding-right: 150px; justify-content: center;">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum. Nullam ac urna eu felis dapibus condimentum. Nullam ac urna eu felis dapibus condimentum. Nullam ac urna eu felis dapibus condimentum. </p>
+            </div>
+        </section>
+        
+        
+        <section id="cta-section" class="green-banner-box">
+            <div class="green-overlay"></div>
+            <div class="banner-content-inner">
+                <p>Duis sed odio sit amet nibh vulputate Morbi a sit amet mauris. accumsan ipsum velit</p>
+                <a href="" class="main-btn" style="margin-top: 50px; color: black;">Rent a bike now</a>
+                
+            </div>
+        </section>
+
+    </main>

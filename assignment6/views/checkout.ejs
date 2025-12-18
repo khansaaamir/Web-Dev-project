@@ -1,0 +1,320 @@
+<%- include('layout', { title: 'Checkout', body: `
+<main class="container mb-5 clearfix paddingfix">
+  <div class="row g-4">
+    
+    <div class="col-12 col-md-7">
+
+      <h2 class="h4 mb-3">Customer & Shipping Details</h2>
+
+      <form id="checkoutForm" class="needs-validation" action="/success" method="GET">
+        <div class="row g-3 mb-4">
+
+          <div class="col-sm-12">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Your Name Here">
+            <div id="fullNameHelp" class="form-text d-none d-md-block">Please enter the full name on your ID.</div>
+            <div class="invalid-feedback" id="fullName-feedback">Full name is required and must be at least 3 letters.</div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="invalid-feedback" id="email-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" placeholder="e.g. 555-123-4567">
+            <div id="phoneHelp" class="form-text d-none d-md-block">We might call you about your order.</div>
+            <div class="invalid-feedback" id="phone-feedback">Phone must be 10 or more digits, digits only.</div>
+          </div>
+
+          <div class="col-12">
+            <label for="address" class="form-label">Address (Street)</label>
+            <input type="text" class="form-control" id="address" placeholder="123 Main St, Apt 4">
+            <div class="invalid-feedback" id="address-feedback">Street address is required.</div>
+          </div>
+
+          <div class="col-md-5">
+            <label for="country" class="form-label">Country</label>
+            <select class="form-select" id="country">
+              <option value="">Select Country...</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option >Pakistan</option>
+            </select>
+            <div class="invalid-feedback" id="country-feedback">You must choose a country!</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city">
+            <div class="invalid-feedback" id="city-feedback">City name is required.</div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="postalCode" class="form-label">Zip Code</label>
+            <input type="text" class="form-control" id="postalCode">
+            <div class="invalid-feedback" id="postalCode-feedback">Postal code must be 4-6 digits.</div>
+          </div>
+
+          <div class="col-12 mt-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="billingSame">
+              <label class="form-check-label" for="billingSame">Billing address is same (Save me time!)</label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-3">Payment Method</h2>
+
+        <div id="paymentMethodGroup" class="my-3">
+          <div class="form-check">
+            <input id="credit" name="paymentMethod" type="radio" class="form-check-input">
+            <label for="credit" class="form-check-label">Card (Visa/Master)</label>
+          </div>
+          <div class="form-check">
+            <input id="cod" name="paymentMethod" type="radio" class="form-check-input">
+            <label for="cod" class="form-check-label">Cash on Delivery (COD - Easy!)</label>
+          </div>
+          <div class="form-check">
+            <input id="wallet" name="paymentMethod" type="radio" class="form-check-input">
+            <label for="wallet" class="form-check-label">Digital Wallet</label>
+          </div>
+          <div class="invalid-feedback d-block mt-1" id="paymentMethod-feedback" style="display:none;">Please select a payment method.</div>
+        </div>
+
+        <div id="cardDetails" class="row gy-3" style="display:none;">
+          <div class="col-md-6">
+            <label for="cc-name" class="form-label">Cardholder Name</label>
+            <input type="text" class="form-control" id="cc-name">
+            <div class="invalid-feedback" id="cc-name-feedback">Card name is required (Full name).</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="cc-number" class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cc-number" placeholder="XXXX XXXX XXXX XXXX">
+            <div class="invalid-feedback" id="cc-number-feedback">Gotta have a card number.</div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="cc-expiration" class="form-label">Expiry (MM/YY)</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="01/25">
+            <div class="invalid-feedback" id="cc-expiration-feedback">Expiration needed.</div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="cc-cvv" class="form-label">CVV (3 Digits)</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="123">
+            <div class="invalid-feedback" id="cc-cvv-feedback">Security code, don't share!</div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-3">Ready to Go?</h2>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="termsCheck">
+          <label class="form-check-label" for="termsCheck">I accept all <a href="#" class="mint-text">Terms and Conditions</a></label>
+          <div id="termsFeedback" class="text-danger terms-error-text">You MUST check this box to proceed.</div>
+        </div>
+
+        <button type="submit" id="placeOrderBtn" class="w-100 btn btn-lg mint-bg fw-bold border-dark">Complete Rental Now!</button>
+
+      </form>
+    </div>
+
+    
+    <div class="col-12 col-md-5 order-first order-md-last">
+      <div class="card shadow-sm sticky-summary">
+        <div class="card-header mint-light-bg">
+          <h2 class="h5 mb-0 text-center text-dark">Your Order Summary</h2>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush mb-0">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Fixie Bike Rental (x1)</h6>
+                <small class="text-muted">7 days plan</small>
+              </div>
+              <span>$140.00</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div><h6 class="my-0">Accessories Bundle</h6></div>
+              <span>$15.00</span>
+            </li>
+          </ul>
+
+          <div class="p-3 border-top">
+            <form>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Coupon Code">
+                <button class="btn btn-outline-secondary mint-bg" type="submit">Apply Discount</button>
+              </div>
+            </form>
+          </div>
+
+          <ul class="list-group list-group-flush border-top">
+            <li class="list-group-item d-flex justify-content-between"><span>Subtotal</span><strong>$155.00</strong></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Shipping (Fast)</span><strong>$10.00</strong></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Tax (Local Rate)</span><strong>$15.50</strong></li>
+            <li class="list-group-item d-flex justify-content-between mint-light-bg fw-bold">
+              <span class="text-success">GRAND TOTAL (USD)</span>
+              <strong class="text-success">$180.50</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+  function showValid(input, ok, msg){
+    var feedback = $('#' + input.attr('id') + '-feedback');
+    input.removeClass('is-valid is-invalid');
+    if(ok){
+      input.addClass('is-valid');
+      feedback.hide();
+    }else{
+      input.addClass('is-invalid');
+      feedback.text(msg).show();
+    }
+  }
+
+  function checkField(el){
+    var id = el.attr('id');
+    var v = el.val();
+
+    if(id == 'fullName'){
+        var clean = v.trim().replace(/\s+/g, ' '); 
+        el.val(clean);                             
+        return clean.length >= 3 && /^[A-Za-z ]+$/.test(clean);
+    }else if(id == 'email'){
+        var clean = v.trim().toLowerCase(); 
+        el.val(clean);
+        var re = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+        return re.test(clean);
+    }else if(id=='phone'){
+      var only = v.replace(/\D/g,'');
+      return only.length>=10;
+    }else if(id=='address' || id=='city'){
+      return v.trim().length>0;
+    }else if(id == 'postalCode'){
+        var clean = v.trim().replace(/\D/g,'');   
+        el.val(clean);                            
+        return clean.length >= 4 && clean.length <= 6;
+    }else if(id=='country'){
+      return v!="";
+    }
+    if(el.closest('#cardDetails').length && $('#credit').is(':checked')){
+      if(v.trim().length==0) return false;
+      if(id=='cc-cvv' && !/^\d{3}$/.test(v)) return false;
+    }
+    return true;
+  }
+
+  function bigValidation(scrollYes){
+    var allgood=true;
+    var first=null;
+
+    $('#checkoutForm').find('input:not(#termsCheck), select').each(function(){
+      var x=$(this);
+      var inCard=x.closest('#cardDetails').length;
+      if(inCard && !$('#credit').is(':checked')){
+        x.removeClass('is-valid is-invalid');
+        $('#' + x.attr('id') + '-feedback').hide();
+        return true;
+      }
+      var ok=checkField(x);
+      var msg=$('#' + x.attr('id') + '-feedback').data('default-message') || x.nextAll('.invalid-feedback').first().text();
+      showValid(x,ok,msg);
+      if(!ok){
+        allgood=false;
+        if(!first) first=x;
+      }
+    });
+
+    var pay=$('input[name="paymentMethod"]:checked').length>0;
+    if(!pay){
+      $('#paymentMethod-feedback').show();
+      allgood=false;
+      if(!first) first=$('#paymentMethodGroup');
+    }else{
+      $('#paymentMethod-feedback').hide();
+    }
+
+    var terms=$('#termsCheck').is(':checked');
+    if(!terms){
+      $('#termsFeedback').show();
+      allgood=false;
+      if(!first) first=$('#termsCheck');
+    }else{
+      $('#termsFeedback').hide();
+    }
+
+    if(!allgood && first && scrollYes){
+      $('html,body').animate({scrollTop:first.offset().top-80},500);
+    }
+    return allgood;
+  }
+
+  $('.invalid-feedback').each(function(){
+    $(this).data('default-message',$(this).text());
+  });
+
+  $('#checkoutForm').on('blur change','input:not(#termsCheck), select',function(){
+    var me=$(this);
+    if(me.closest('#cardDetails').length && !$('#credit').is(':checked')) return;
+    var ok=checkField(me);
+    var msg=$('#' + me.attr('id') + '-feedback').data('default-message');
+    showValid(me,ok,msg);
+  });
+
+  $('input[name="paymentMethod"]').on('change',function(){
+    var id=$(this).attr('id');
+    if(id=='credit'){
+      $('#cardDetails').slideDown();
+    }else{
+      $('#cardDetails').slideUp();
+      $('#cardDetails input').removeClass('is-invalid is-valid');
+      $('#cardDetails .invalid-feedback').hide();
+    }
+    $('#paymentMethod-feedback').hide();
+  });
+
+  if(!$('input[name="paymentMethod"]:checked').length){
+    $('#cardDetails').hide();
+  }
+
+  $('#termsCheck').on('change',function(){
+    if($(this).is(':checked')){
+      $('#termsFeedback').hide();
+    }else{
+      $('#termsFeedback').show();
+    }
+  });
+
+  $('#checkoutForm').on('submit',function(e){
+    e.preventDefault();
+    if(bigValidation(true)){
+      console.log("All good, sending form now!!!");
+      this.submit();
+    }
+  });
+
+});
+</script>
+`
+}) %>
