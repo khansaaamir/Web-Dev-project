@@ -3,6 +3,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
+const session = require('express-session')
 
 const app = express()
 
@@ -39,13 +40,18 @@ Product.countDocuments().then(count => {
     }
 }).catch(err => console.log(err))
 
+app.use(session({
+    secret: 'cart',
+    resave: false,
+    saveUninitialized: true
+}))
 
 app.get('/', function(req, res) {
     let page = parseInt(req.query.page) || 1
     let limit = parseInt(req.query.limit) || 3
     let category = req.query.category || ''
     let minPrice = parseInt(req.query.minPrice) || 0
-    let maxPrice = parseInt(req.query.maxPrice) || 10000
+    let maxPrice = parseInt(req.query.maxPrice) || 1000000
 
     let filter = {}
     if(category !== '') filter.category = category
@@ -67,9 +73,6 @@ app.get('/', function(req, res) {
 
 app.get('/checkout', function(req, res) {
     res.render('checkout')
-})
-app.get('/admin', function(req, res) {
-    res.render('admin/dashboard')
 })
 
 app.get('/success', function(req, res) {
@@ -105,7 +108,7 @@ app.post('/admin/products/add', upload.single('image'), function(req, res){
 
     let product = new Product({
         name: req.body.name,
-        price: req.body.price,
+        price: parseFloat(req.body.price) || 0,
         category: req.body.category,
         image: imagePath,
         description: req.body.description
@@ -129,7 +132,7 @@ app.get('/admin/products/edit/:id', function(req, res){
 app.post('/admin/products/edit/:id', upload.single('image'), function(req, res){
     let updateData = {
         name: req.body.name,
-        price: req.body.price,
+        price: parseFloat(req.body.price) || 0,
         category: req.body.category,
         description: req.body.description
     }
@@ -149,6 +152,49 @@ app.post('/admin/products/delete/:id', function(req, res){
     Product.findByIdAndDelete(req.params.id).then(function(){
         res.redirect('/admin/products')
     })
+})
+app.get('/product/:id', async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    res.render('product', { product })
+})
+app.get('/add-to-cart/:id', async (req, res) => {
+    if (!req.session.cart) {
+        req.session.cart = []
+    }
+
+    const product = await Product.findById(req.params.id)
+
+    let found = false
+
+    req.session.cart.forEach(item => {
+        if (item._id == product._id) {
+            item.qty = item.qty + 1
+            found = true
+        }
+    })
+
+    if (!found) {
+        req.session.cart.push({
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            qty: 1
+        })
+    }
+
+    res.redirect('/cart')
+})
+app.get('/cart', (req, res) => {
+    let cart = req.session.cart || []
+    res.render('cart', { cart })
+})
+app.get('/remove-from-cart/:id', (req, res) => {
+    req.session.cart = req.session.cart.filter(item => item._id != req.params.id)
+    res.redirect('/cart')
+})
+app.get('/clear-cart', (req, res) => {
+    req.session.cart = []
+    res.redirect('/cart')
 })
 
 

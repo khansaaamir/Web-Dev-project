@@ -35,12 +35,13 @@
                         <div class="bike-list-flex" id="bike-list-flex">
                             <% products.forEach(function(product){ %>
                                 <div class="bike-card-item">
-                                    <a href="#">
+                                    <a href="/product/<%= product._id %>">
                                         <img src="<%= product.image %>">
                                         <p><%= product.name %> - $<%= product.price %></p>
                                         <p><%= product.description %></p>
                                     </a>
                                 </div>
+
                             <% }) %>
                         </div>
 
