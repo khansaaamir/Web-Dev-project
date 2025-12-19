@@ -83,7 +83,7 @@
             <input id="wallet" name="paymentMethod" type="radio" class="form-check-input">
             <label for="wallet" class="form-check-label">Digital Wallet</label>
           </div>
-          <div class="invalid-feedback d-block mt-1" id="paymentMethod-feedback" style="display:none;">Please select a payment method.</div>
+          <div class="invalid-feedback mt-1" id="paymentMethod-feedback" style="display:none;">Please select a payment method.</div>
         </div>
 
         <div id="cardDetails" class="row gy-3" style="display:none;">
@@ -121,53 +121,57 @@
           <div id="termsFeedback" class="text-danger terms-error-text">You MUST check this box to proceed.</div>
         </div>
 
-        <button type="submit" id="placeOrderBtn" class="w-100 btn btn-lg mint-bg fw-bold border-dark">Complete Rental Now!</button>
+        <button type="submit" id="placeOrderBtn" class="w-100 btn btn-lg mint-bg fw-bold border-dark">Complete Order Now!</button>
 
       </form>
     </div>
 
     
-    <div class="col-12 col-md-5 order-first order-md-last">
-      <div class="card shadow-sm sticky-summary">
-        <div class="card-header mint-light-bg">
-          <h2 class="h5 mb-0 text-center text-dark">Your Order Summary</h2>
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group list-group-flush mb-0">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Fixie Bike Rental (x1)</h6>
-                <small class="text-muted">7 days plan</small>
-              </div>
-              <span>$140.00</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div><h6 class="my-0">Accessories Bundle</h6></div>
-              <span>$15.00</span>
-            </li>
-          </ul>
-
-          <div class="p-3 border-top">
-            <form>
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Coupon Code">
-                <button class="btn btn-outline-secondary mint-bg" type="submit">Apply Discount</button>
-              </div>
-            </form>
+      <div class="col-12 col-md-5 order-first order-md-last">
+        <div class="card shadow-sm sticky-summary">
+          <div class="card-header mint-light-bg">
+            <h2 class="h5 mb-0 text-center text-dark">Your Order Summary</h2>
           </div>
 
-          <ul class="list-group list-group-flush border-top">
-            <li class="list-group-item d-flex justify-content-between"><span>Subtotal</span><strong>$155.00</strong></li>
-            <li class="list-group-item d-flex justify-content-between"><span>Shipping (Fast)</span><strong>$10.00</strong></li>
-            <li class="list-group-item d-flex justify-content-between"><span>Tax (Local Rate)</span><strong>$15.50</strong></li>
-            <li class="list-group-item d-flex justify-content-between mint-light-bg fw-bold">
-              <span class="text-success">GRAND TOTAL (USD)</span>
-              <strong class="text-success">$180.50</strong>
-            </li>
-          </ul>
+        <div class="card-body p-0">
+
+        <% if(cart.length === 0){ %>
+          <p style="padding:20px;text-align:center">Cart is empty</p>
+        <% } else { %>
+
+            <ul class="list-group list-group-flush mb-0">
+              <% cart.forEach(function(item){ %>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0"><%= item.name %> (x<%= item.qty %>)</h6>
+                    <small class="text-muted">Rental item</small>
+                  </div>
+                  <span>$<%= item.price * item.qty %></span>
+                </li>
+              <% }) %>
+            </ul>
+
+            <ul class="list-group list-group-flush border-top">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Subtotal</span>
+                <strong>$<%= total %></strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Shipping</span>
+                <strong>$0</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between mint-light-bg fw-bold">
+                <span class="text-success">GRAND TOTAL</span>
+                <strong class="text-success">$<%= total %></strong>
+              </li>
+            </ul>
+
+          <% } %>
+
         </div>
-      </div>
-    </div>
+  </div>
+</div>
+
 
   </div>
 </main>

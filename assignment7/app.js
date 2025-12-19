@@ -72,12 +72,26 @@ app.get('/', function(req, res) {
 })
 
 app.get('/checkout', function(req, res) {
-    res.render('checkout')
+    let cart = req.session.cart || []
+    let total = 0
+
+    cart.forEach(item => {
+        total = total + (item.price * item.qty)
+    })
+
+    res.render('checkout', {
+        cart: cart,
+        total: total
+    })
 })
 
+
+
 app.get('/success', function(req, res) {
+    req.session.cart = []
     res.render('success')
 })
+
 
 app.get('/admin', function(req, res){
     res.render('admin/dashboard', {

@@ -1,0 +1,31 @@
+<div style="max-width:800px;margin:10px auto;font-family:Arial;text-align:center; padding-top: 9%;">
+
+<h2>Order Confirmed</h2>
+
+<% if(order){ %>
+
+<p>Status: <strong><%= order.status %></strong></p>
+
+<table style="width:100%;border-collapse:collapse;margin-top:20px">
+<tr>
+<th style="border:1px solid #ddd;padding:10px">Product</th>
+<th style="border:1px solid #ddd;padding:10px">Qty</th>
+<th style="border:1px solid #ddd;padding:10px">Price</th>
+</tr>
+
+<% order.items.forEach(function(item){ %>
+<tr>
+<td style="border:1px solid #ddd;padding:10px"><%= item.name %></td>
+<td style="border:1px solid #ddd;padding:10px"><%= item.qty %></td>
+<td style="border:1px solid #ddd;padding:10px">$<%= item.price * item.qty %></td>
+</tr>
+<% }) %>
+</table>
+
+<h3 style="margin-top:20px">Grand Total: $<%= order.total %></h3>
+
+<% } %>
+
+<a href="/" style="display:inline-block;margin-top:30px">Go Home</a>
+
+</div>

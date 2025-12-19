@@ -1,0 +1,36 @@
+<div style="max-width:800px;margin:10px auto;font-family:Arial; padding-top: 9%;">
+
+<h2>Order Preview</h2>
+
+<% if(cart.length === 0){ %>
+<p>Cart is empty</p>
+<% } else { %>
+
+<table style="width:100%;border-collapse:collapse">
+<tr>
+<th style="border:1px solid #ddd;padding:10px">Product</th>
+<th style="border:1px solid #ddd;padding:10px">Price</th>
+<th style="border:1px solid #ddd;padding:10px">Qty</th>
+<th style="border:1px solid #ddd;padding:10px">Total</th>
+</tr>
+
+<% cart.forEach(function(item){ %>
+<tr>
+<td style="border:1px solid #ddd;padding:10px"><%= item.name %></td>
+<td style="border:1px solid #ddd;padding:10px">$<%= item.price %></td>
+<td style="border:1px solid #ddd;padding:10px"><%= item.qty %></td>
+<td style="border:1px solid #ddd;padding:10px">$<%= item.price * item.qty %></td>
+</tr>
+<% }) %>
+</table>
+
+<h3 style="margin-top:20px">Grand Total: $<%= total %></h3>
+
+<form action="/order/confirm" method="post" style="margin-top:20px">
+<button type="submit" style="padding:10px 20px">Confirm Order</button>
+<a href="/cart" style="margin-left:10px">Go Back to Cart</a>
+</form>
+
+<% } %>
+
+</div>

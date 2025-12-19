@@ -1,0 +1,27 @@
+<div style="max-width:900px;margin:20px auto;display:flex;gap:40px;font-family:Arial; padding-top: 10%;">
+
+    <div>
+        <img src="<%= product.image %>" style="width:350px;border-radius:8px">
+    </div>
+
+    <div>
+        <h2 style="margin-bottom:10px"><%= product.name %></h2>
+        <p style="color:#666;margin-bottom:15px"><%= product.description %></p>
+        <h3 style="margin-bottom:20px">$<%= product.price %></h3>
+
+        <a href="/add-to-cart/<%= product._id %>">
+            <button style="
+                padding:12px 25px;
+                background:#6cc04a;
+                border:none;
+                color:#000;
+                font-size:16px;
+                cursor:pointer;
+                border-radius:5px
+            ">
+                Add to Cart
+            </button>
+        </a>
+    </div>
+
+</div>
