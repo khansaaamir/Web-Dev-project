@@ -1,0 +1,25 @@
+<h1>Orders</h1>
+<table border="1" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <% orders.forEach(function(order){ %>
+        <tr>
+            <td><%= order._id %></td>
+            <td><%= order.email %></td>
+            <td><%= order.total %></td>
+            <td><%= order.status %></td>
+            <td>
+                <% if(order.status != 'Delivered'){ %>
+                    <a href="/admin/orders/update/<%= order._id %>">Next Status</a>
+                <% } else { %>
+                    Delivered
+                <% } %>
+            </td>
+        </tr>
+    <% }) %>
+</table>

@@ -150,6 +150,26 @@ app.get('/admin', function(req, res){
         layout: 'admin/layout'
     })
 })
+app.get('/admin/orders', function(req, res){
+    Order.find().then(function(orders){
+        res.render('admin/orders', {
+            orders: orders,
+            layout: 'admin/layout'
+        })
+    })
+})
+app.get('/admin/orders/update/:id', function(req, res){
+    Order.findById(req.params.id).then(function(order){
+        if(order.status == 'Placed'){
+            order.status = 'Processing'
+        } else if(order.status == 'Processing'){
+            order.status = 'Delivered'
+        }
+        order.save().then(function(){
+            res.redirect('/admin/orders')
+        })
+    })
+})
 
 app.get('/admin/products', function(req, res){
     Product.find().then(function(products){

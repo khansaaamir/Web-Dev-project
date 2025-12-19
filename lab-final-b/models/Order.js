@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema({
     email: String,
     items: Array,
     total: Number,
-    status: String,
+    status: { type: String, default: 'Placed' },
     createdAt: { type: Date, default: Date.now }
 })
 
